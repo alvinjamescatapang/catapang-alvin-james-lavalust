@@ -89,7 +89,7 @@ $config['base_url'] 				= '';
 | Enable Static Proxies / Facades
 |
 */
-$config['proxy_enabled']           = FALSE;
+$config['proxy_enabled']           = TRUE;
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -137,7 +137,7 @@ $config['log_dir']                  = 'runtime/logs/';
 | Note: This will NOT disable or override the LavaLust-specific
 |	autoloading (app/config/autoload.php)
 */
-$config['composer_autoload']        = FALSE;
+$config['composer_autoload']        = TRUE;
 
 /*
 |--------------------------------------------------------------------------

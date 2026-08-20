@@ -5,7 +5,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        // Load the view directly
+        // Use the Loader class, which is standard in LavaLust (CodeIgniter style)
         $this->load->view('student_home');
     }
 
@@ -17,7 +17,7 @@ class StudentController extends Controller
             'course'     => 'BS Information Technology',
             'year'       => '3rd Year',
             'section'    => 'F3',
-            'email'      => 'alvin@example.com'
+            'email'      => 'catapang.alvinj@minsu.edu.ph'
         ];
         // Pass data as second parameter
         $this->load->view('student_profile', $student);
