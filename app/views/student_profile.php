@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile | Student Information System</title>
+
+    <title>Student Profile</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+        :root {
+            --primary: #176b5b;
+            --primary-dark: #0d4f43;
+            --accent: #79c8b4;
+            --cream: #f7f5ef;
+            --card: #fffdf8;
+            --text: #25342f;
+            --muted: #6b7772;
+            --border: #e4e1d8;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,227 +28,186 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f7f5;
-            color: #1e293b;
-        }
-
-        .container {
-            display: flex;
             min-height: 100vh;
+            font-family: 'DM Sans', Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 15% 20%, rgba(121, 200, 180, 0.25), transparent 25%),
+                radial-gradient(circle at 85% 80%, rgba(23, 107, 91, 0.12), transparent 25%),
+                linear-gradient(135deg, #f4f1e9, #eef5f1);
+            padding: 35px 20px 60px;
         }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 260px;
-            background: #111827;
-            padding: 30px 20px;
-            color: white;
-            position: fixed;
-            height: 100vh;
-        }
-
-        .logo {
+        nav {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 50px;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: #22c55e;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 22px;
-        }
-
-        .logo h2 {
-            font-size: 17px;
-        }
-
-        .logo span {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-
-        .menu-title {
-            font-size: 11px;
-            color: #6b7280;
-            letter-spacing: 1px;
-            margin: 25px 12px 10px;
-        }
-
-        .sidebar a {
-            display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        nav a {
             text-decoration: none;
-            color: #d1d5db;
-            padding: 14px;
-            margin-bottom: 8px;
-            border-radius: 10px;
-            transition: 0.3s;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 11px 20px;
+            border-radius: 50px;
+            transition: 0.3s ease;
         }
 
-        .sidebar a:hover,
-        .sidebar a.active {
-            background: #22c55e;
+        nav a:hover {
+            color: var(--primary);
+            background: rgba(23, 107, 91, 0.08);
+        }
+
+        nav a.active {
+            background: var(--primary);
             color: white;
+            box-shadow: 0 8px 20px rgba(23, 107, 91, 0.2);
         }
 
-        /* MAIN */
-        .main {
-            margin-left: 260px;
-            width: calc(100% - 260px);
-            padding: 35px 50px;
-        }
-
-        .topbar {
-            margin-bottom: 30px;
-        }
-
-        .topbar h1 {
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-
-        .topbar p {
-            color: #64748b;
-        }
-
-        /* PROFILE CARD */
-        .profile-container {
-            background: white;
-            border-radius: 20px;
-            border: 1px solid #e5e7eb;
+        .profile-card {
+            width: 100%;
+            max-width: 620px;
+            margin: 0 auto;
             overflow: hidden;
-            max-width: 1000px;
-        }
-
-        .profile-banner {
-            height: 180px;
-            background: linear-gradient(135deg, #15803d, #22c55e);
-        }
-
-        .profile-content {
-            padding: 0 40px 40px;
+            background: var(--card);
+            border-radius: 28px;
+            box-shadow: 0 20px 55px rgba(31, 61, 51, 0.13);
         }
 
         .profile-header {
-            display: flex;
-            align-items: flex-end;
-            gap: 25px;
-            margin-top: -65px;
-            margin-bottom: 35px;
+            padding: 38px 30px 70px;
+            text-align: center;
+            color: white;
+            background:
+                linear-gradient(135deg, rgba(13, 79, 67, 0.85), rgba(23, 107, 91, 0.75)),
+                linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        .profile-header p {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c5f0e3;
+            margin-bottom: 8px;
+        }
+
+        .profile-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+        }
+
+        .profile-body {
+            padding: 0 38px 40px;
         }
 
         .avatar {
-            width: 130px;
-            height: 130px;
-            background: #dcfce7;
-            border: 6px solid white;
+            width: 100px;
+            height: 100px;
+            margin: -50px auto 28px;
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            color: #15803d;
-            font-size: 45px;
-            font-weight: bold;
+            justify-content: center;
+            background: var(--cream);
+            border: 6px solid var(--card);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            color: var(--primary);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 700;
         }
 
-        .profile-name {
-            padding-bottom: 15px;
+        .student-name {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .profile-name h2 {
-            font-size: 28px;
+        .student-name h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
         }
 
-        .profile-name p {
-            color: #64748b;
-            margin-top: 5px;
+        .student-name p {
+            color: var(--muted);
+            font-size: 14px;
         }
 
-        .details-title {
-            margin-bottom: 20px;
+        .information {
+            border-top: 1px solid var(--border);
         }
 
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+            padding: 16px 5px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .detail {
-            background: #f8faf9;
-            border: 1px solid #e5e7eb;
-            padding: 18px;
-            border-radius: 12px;
+        .info-label {
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        .detail-label {
-            display: block;
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 7px;
-        }
-
-        .detail-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1e293b;
+        .info-value {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: right;
+            word-break: break-word;
         }
 
         .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #111827;
-            color: white;
+            display: block;
+            width: fit-content;
+            margin: 32px auto 0;
+            padding: 12px 22px;
+            border: 1px solid var(--primary);
+            border-radius: 14px;
             text-decoration: none;
-            border-radius: 10px;
-            transition: 0.3s;
+            color: var(--primary);
+            font-weight: 600;
+            transition: 0.3s ease;
         }
 
         .back-btn:hover {
-            background: #374151;
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
         }
 
-        @media (max-width: 768px) {
-
-            .sidebar {
-                width: 75px;
-                padding: 20px 10px;
+        @media (max-width: 600px) {
+            body {
+                padding: 25px 15px;
             }
 
-            .logo h2,
-            .logo span,
-            .menu-title,
-            .sidebar a span {
-                display: none;
-            }
-
-            .main {
-                margin-left: 75px;
-                width: calc(100% - 75px);
-                padding: 25px;
-            }
-
-            .details-grid {
-                grid-template-columns: 1fr;
+            nav {
+                margin-bottom: 30px;
             }
 
             .profile-header {
-                flex-direction: column;
-                align-items: flex-start;
+                padding: 35px 20px 65px;
             }
 
-            .profile-content {
-                padding: 0 25px 30px;
+            .profile-body {
+                padding: 0 25px 35px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .info-value {
+                text-align: left;
             }
         }
     </style>
@@ -241,120 +215,86 @@
 
 <body>
 
-<div class="container">
+    <nav>
+        <a href="<?= site_url('student'); ?>">Home</a>
 
-    <aside class="sidebar">
+        <a href="<?= site_url('student/profile'); ?>" class="active">
+            Student Profile
+        </a>
+    </nav>
 
-        <div class="logo">
-            <div class="logo-icon">🎓</div>
+    <main class="profile-card">
 
-            <div>
-                <h2>Student Portal</h2>
-                <span>Information System</span>
+        <div class="profile-header">
+            <p>Personal Details</p>
+            <h1>Student Profile</h1>
+        </div>
+
+        <div class="profile-body">
+
+            <div class="avatar">
+                <?= strtoupper(substr($name ?? 'S', 0, 1)); ?>
             </div>
-        </div>
 
-        <p class="menu-title">MAIN MENU</p>
+            <div class="student-name">
+                <h2><?= $name ?? 'Student Name'; ?></h2>
+                <p><?= $course ?? 'Student'; ?></p>
+            </div>
 
-        <nav>
-            <a href="<?= site_url('student'); ?>">
-                <span>🏠</span>
-                <span>Home</span>
-            </a>
+            <div class="information">
 
-            <a href="<?= site_url('student/profile'); ?>" class="active">
-                <span>👤</span>
-                <span>My Profile</span>
-            </a>
-        </nav>
-
-    </aside>
-
-    <main class="main">
-
-        <div class="topbar">
-            <h1>My Profile</h1>
-            <p>View your personal and academic information</p>
-        </div>
-
-        <section class="profile-container">
-
-            <div class="profile-banner"></div>
-
-            <div class="profile-content">
-
-                <div class="profile-header">
-
-                    <div class="avatar">
-                        <?= strtoupper(substr($name ?? 'S', 0, 1)); ?>
-                    </div>
-
-                    <div class="profile-name">
-                        <h2><?= $name ?? 'Student Name'; ?></h2>
-                        <p><?= $course ?? 'Student'; ?></p>
-                    </div>
-
+                <div class="info-row">
+                    <span class="info-label">Student ID</span>
+                    <span class="info-value">
+                        <?= $student_id ?? ''; ?>
+                    </span>
                 </div>
 
-                <h3 class="details-title">Student Information</h3>
-
-                <div class="details-grid">
-
-                    <div class="detail">
-                        <span class="detail-label">Student ID</span>
-                        <span class="detail-value">
-                            <?= $student_id ?? ''; ?>
-                        </span>
-                    </div>
-
-                    <div class="detail">
-                        <span class="detail-label">Full Name</span>
-                        <span class="detail-value">
-                            <?= $name ?? ''; ?>
-                        </span>
-                    </div>
-
-                    <div class="detail">
-                        <span class="detail-label">Course</span>
-                        <span class="detail-value">
-                            <?= $course ?? ''; ?>
-                        </span>
-                    </div>
-
-                    <div class="detail">
-                        <span class="detail-label">Year Level</span>
-                        <span class="detail-value">
-                            <?= $year ?? ''; ?>
-                        </span>
-                    </div>
-
-                    <div class="detail">
-                        <span class="detail-label">Section</span>
-                        <span class="detail-value">
-                            <?= $section ?? ''; ?>
-                        </span>
-                    </div>
-
-                    <div class="detail">
-                        <span class="detail-label">Email Address</span>
-                        <span class="detail-value">
-                            <?= $email ?? ''; ?>
-                        </span>
-                    </div>
-
+                <div class="info-row">
+                    <span class="info-label">Name</span>
+                    <span class="info-value">
+                        <?= $name ?? ''; ?>
+                    </span>
                 </div>
 
-                <a href="<?= site_url('student'); ?>" class="back-btn">
-                    ← Back to Dashboard
-                </a>
+                <div class="info-row">
+                    <span class="info-label">Course</span>
+                    <span class="info-value">
+                        <?= $course ?? ''; ?>
+                    </span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Year Level</span>
+                    <span class="info-value">
+                        <?= $year ?? ''; ?>
+                    </span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Section</span>
+                    <span class="info-value">
+                        <?= $section ?? ''; ?>
+                    </span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">
+                        <?= $email ?? ''; ?>
+                    </span>
+                </div>
 
             </div>
 
-        </section>
+            <a href="<?= site_url('student'); ?>" class="back-btn">
+                ← Back to Home
+            </a>
+
+        </div>
 
     </main>
 
-</div>
-
 </body>
+
 </html>

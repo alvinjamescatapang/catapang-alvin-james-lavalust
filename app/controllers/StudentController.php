@@ -12,8 +12,8 @@ class StudentController extends Controller
     public function profile()
     {
         $student = [
-            'student_id' => '2024-00115',
-            'name' => 'Alvin James',
+            'student_id' => 'MCC2024-00115',
+            'name' => 'Alvin James L. Catapang',
             'course' => 'BS Information Technology',
             'year' => '3rd Year',
             'section' => 'F3',

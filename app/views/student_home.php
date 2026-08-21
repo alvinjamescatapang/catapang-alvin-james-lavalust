@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Home | Student Information System</title>
+
+    <title>Student Home</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+        :root {
+            --primary: #176b5b;
+            --primary-dark: #0d4f43;
+            --accent: #79c8b4;
+            --cream: #f7f5ef;
+            --card: #fffdf8;
+            --text: #25342f;
+            --muted: #6b7772;
+            --border: #e4e1d8;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,210 +28,140 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f7f5;
-            color: #1e293b;
-        }
-
-        .container {
-            display: flex;
             min-height: 100vh;
+            font-family: 'DM Sans', Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 15% 20%, rgba(121, 200, 180, 0.25), transparent 25%),
+                radial-gradient(circle at 85% 80%, rgba(23, 107, 91, 0.12), transparent 25%),
+                linear-gradient(135deg, #f4f1e9, #eef5f1);
+            padding: 35px 20px;
         }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 260px;
-            background: #111827;
-            padding: 30px 20px;
-            color: white;
-            position: fixed;
-            height: 100vh;
-        }
-
-        .logo {
+        nav {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 50px;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: #22c55e;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 22px;
-        }
-
-        .logo h2 {
-            font-size: 17px;
-        }
-
-        .logo span {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-
-        .menu-title {
-            font-size: 11px;
-            color: #6b7280;
-            letter-spacing: 1px;
-            margin: 25px 12px 10px;
-        }
-
-        .sidebar a {
-            display: flex;
             align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #d1d5db;
-            padding: 14px;
-            margin-bottom: 8px;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover,
-        .sidebar a.active {
-            background: #22c55e;
-            color: white;
-        }
-
-        /* MAIN CONTENT */
-        .main {
-            margin-left: 260px;
-            width: calc(100% - 260px);
-            padding: 35px 50px;
-        }
-
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 10px;
             margin-bottom: 45px;
         }
 
-        .topbar h1 {
-            font-size: 28px;
+        nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 11px 20px;
+            border-radius: 50px;
+            transition: 0.3s ease;
         }
 
-        .topbar p {
-            color: #64748b;
-            margin-top: 5px;
+        nav a:hover {
+            color: var(--primary);
+            background: rgba(23, 107, 91, 0.08);
         }
 
-        .student-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #dcfce7;
-            color: #16a34a;
+        nav a.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 20px rgba(23, 107, 91, 0.2);
+        }
+
+        .home-card {
+            width: 100%;
+            max-width: 570px;
+            margin: 0 auto;
+            padding: 48px 45px;
+            text-align: center;
+            background: rgba(255, 253, 248, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 28px;
+            box-shadow: 0 20px 55px rgba(31, 61, 51, 0.12);
+            backdrop-filter: blur(8px);
+        }
+
+        .symbol {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 28px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-        }
-
-        /* WELCOME CARD */
-        .welcome-card {
-            background: linear-gradient(135deg, #15803d, #22c55e);
-            border-radius: 20px;
-            padding: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
-            margin-bottom: 30px;
-        }
-
-        .welcome-card h2 {
             font-size: 30px;
-            margin-bottom: 12px;
+            box-shadow: 0 12px 25px rgba(23, 107, 91, 0.2);
         }
 
-        .welcome-card p {
-            color: #dcfce7;
+        .eyebrow {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 34px;
+            line-height: 1.25;
+            margin-bottom: 18px;
+            color: var(--text);
+        }
+
+        .welcome-text {
+            max-width: 420px;
+            margin: 0 auto;
+            color: var(--muted);
+            line-height: 1.7;
             font-size: 16px;
-            max-width: 600px;
-            line-height: 1.6;
+        }
+
+        .divider {
+            width: 55px;
+            height: 3px;
+            border-radius: 10px;
+            background: var(--accent);
+            margin: 26px auto;
         }
 
         .profile-btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 12px 20px;
-            background: white;
-            color: #15803d;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        /* CARDS */
-        .section-title {
-            margin: 25px 0 20px;
-            font-size: 20px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #e5e7eb;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: #dcfce7;
-            color: #16a34a;
-            border-radius: 14px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 18px;
+            gap: 10px;
+            padding: 14px 24px;
+            text-decoration: none;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(23, 107, 91, 0.2);
+            transition: 0.3s ease;
         }
 
-        .card h3 {
-            margin-bottom: 8px;
+        .profile-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 28px rgba(23, 107, 91, 0.25);
         }
 
-        .card p {
-            color: #64748b;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 75px;
-                padding: 20px 10px;
+        @media (max-width: 600px) {
+            body {
+                padding: 25px 15px;
             }
 
-            .logo h2,
-            .logo span,
-            .menu-title,
-            .sidebar a span {
-                display: none;
+            nav {
+                margin-bottom: 30px;
             }
 
-            .main {
-                margin-left: 75px;
-                width: calc(100% - 75px);
-                padding: 25px;
+            .home-card {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 28px;
             }
         }
     </style>
@@ -224,90 +169,36 @@
 
 <body>
 
-<div class="container">
+    <nav>
+        <a href="<?= site_url('student'); ?>" class="active">Home</a>
 
-    <aside class="sidebar">
+        <a href="<?= site_url('student/profile'); ?>">
+            Student Profile
+        </a>
+    </nav>
 
-        <div class="logo">
-            <div class="logo-icon">🎓</div>
+    <main class="home-card">
 
-            <div>
-                <h2>Student Portal</h2>
-                <span>Information System</span>
-            </div>
-        </div>
+        <div class="symbol">✦</div>
 
-        <p class="menu-title">MAIN MENU</p>
+        <p class="eyebrow">Student Space</p>
 
-        <nav>
-            <a href="<?= site_url('student'); ?>" class="active">
-                <span>🏠</span>
-                <span>Home</span>
-            </a>
+        <h1>Welcome to your<br>student page</h1>
 
-            <a href="<?= site_url('student/profile'); ?>">
-                <span>👤</span>
-                <span>My Profile</span>
-            </a>
-        </nav>
+        <p class="welcome-text">
+            This page gives you a simple and convenient way to access
+            your student information and view your profile.
+        </p>
 
-    </aside>
+        <div class="divider"></div>
 
-    <main class="main">
-
-        <div class="topbar">
-
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome to the Student Information System</p>
-            </div>
-
-            <div class="student-icon">
-                ST
-            </div>
-
-        </div>
-
-        <section class="welcome-card">
-            <h2>Welcome, Student! 👋</h2>
-
-            <p>
-                Manage and view your student information through your
-                Student Information System dashboard.
-            </p>
-
-            <a href="<?= site_url('student/profile'); ?>" class="profile-btn">
-                View My Profile →
-            </a>
-        </section>
-
-        <h2 class="section-title">Quick Access</h2>
-
-        <section class="cards">
-
-            <div class="card">
-                <div class="card-icon">👤</div>
-                <h3>My Profile</h3>
-                <p>View your personal and academic information.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🎓</div>
-                <h3>Academic Information</h3>
-                <p>Check your course, year level, and section.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">📧</div>
-                <h3>Contact Details</h3>
-                <p>View your registered email information.</p>
-            </div>
-
-        </section>
+        <a href="<?= site_url('student/profile'); ?>" class="profile-btn">
+            View My Profile
+            <span>→</span>
+        </a>
 
     </main>
 
-</div>
-
 </body>
+
 </html>
