@@ -89,7 +89,7 @@ $config['base_url'] 				= 'https://catapang-alvin-james-lavalust.onrender.com/';
 | Enable Static Proxies / Facades
 |
 */
-$config['proxy_enabled']           = TRUE;
+$config['proxy_enabled']           = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -99,7 +99,7 @@ $config['proxy_enabled']           = TRUE;
 | variable to blank.
 |
 */
-$config['index_page']               = 'index.php';
+$config['index_page']               = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -137,7 +137,7 @@ $config['log_dir']                  = 'runtime/logs/';
 | Note: This will NOT disable or override the LavaLust-specific
 |	autoloading (app/config/autoload.php)
 */
-$config['composer_autoload']        = TRUE;
+$config['composer_autoload']        = FALSE;
 
 /*
 |--------------------------------------------------------------------------
