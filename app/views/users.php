@@ -1,3 +1,4 @@
+```php
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,60 +15,85 @@
             margin: 0;
             padding: 30px;
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #eef4ff;
             color: #333;
         }
 
         .container {
             max-width: 1000px;
             margin: auto;
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 25px;
-            border-radius: 8px;
+            border-radius: 10px;
+            border-top: 4px solid #4f7cff;
+            box-shadow: 0 4px 15px rgba(79, 124, 255, 0.08);
         }
 
         h1 {
             margin: 0 0 20px;
             font-size: 24px;
             font-weight: 600;
+            color: #3158c7;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 650px;
         }
 
         th {
-            padding: 12px 15px;
+            padding: 13px 15px;
             text-align: left;
             font-size: 13px;
             font-weight: 600;
-            background-color: #f5f5f5;
-            border-bottom: 1px solid #ddd;
+            color: #ffffff;
+            background-color: #4f7cff;
+        }
+
+        th:first-child {
+            border-radius: 6px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 6px 0 0;
         }
 
         td {
             padding: 14px 15px;
             font-size: 14px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #e5eaf5;
         }
 
-        tr:last-child td {
+        tbody tr:hover {
+            background-color: #f3f6ff;
+        }
+
+        tbody tr:last-child td {
             border-bottom: none;
         }
 
-        tr:hover {
-            background-color: #fafafa;
+        .id {
+            color: #3158c7;
+            font-weight: 600;
+        }
+
+        .email {
+            color: #555;
+        }
+
+        .username {
+            color: #3158c7;
         }
 
         .no-data {
             text-align: center;
-            padding: 25px;
+            padding: 30px;
             color: #888;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
         }
 
         @media (max-width: 600px) {
@@ -81,10 +107,6 @@
 
             h1 {
                 font-size: 21px;
-            }
-
-            table {
-                min-width: 650px;
             }
         }
     </style>
@@ -115,11 +137,25 @@
                     <?php foreach ($users as $user): ?>
 
                         <tr>
-                            <td><?= htmlspecialchars($user['id']) ?></td>
-                            <td><?= htmlspecialchars($user['firstname']) ?></td>
-                            <td><?= htmlspecialchars($user['lastname']) ?></td>
-                            <td><?= htmlspecialchars($user['email']) ?></td>
-                            <td><?= htmlspecialchars($user['username']) ?></td>
+                            <td class="id">
+                                <?= htmlspecialchars($user['id']) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($user['firstname']) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($user['lastname']) ?>
+                            </td>
+
+                            <td class="email">
+                                <?= htmlspecialchars($user['email']) ?>
+                            </td>
+
+                            <td class="username">
+                                <?= htmlspecialchars($user['username']) ?>
+                            </td>
                         </tr>
 
                     <?php endforeach; ?>
@@ -142,4 +178,4 @@
 
 </body>
 </html>
-
+```
