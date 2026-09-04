@@ -1,4 +1,3 @@
-```php
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,122 +12,79 @@
 
         body {
             margin: 0;
-            padding: 40px 20px;
+            padding: 30px;
             font-family: Arial, sans-serif;
-            background: #f8fafc;
-            color: #1f2937;
+            background-color: #f5f5f5;
+            color: #333;
         }
 
         .container {
-            max-width: 1050px;
+            max-width: 1000px;
             margin: auto;
-            background: #ffffff;
-            padding: 30px;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
         }
 
         h1 {
-            margin: 0;
-            font-size: 26px;
+            margin: 0 0 20px;
+            font-size: 24px;
             font-weight: 600;
-            color: #111827;
-        }
-
-        .user-count {
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 700px;
         }
 
         th {
-            padding: 14px 16px;
+            padding: 12px 15px;
             text-align: left;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #6b7280;
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
         }
 
         td {
-            padding: 16px;
+            padding: 14px 15px;
             font-size: 14px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #eee;
         }
 
-        tbody tr {
-            transition: background-color 0.2s ease;
-        }
-
-        tbody tr:hover {
-            background: #fafafa;
-        }
-
-        tbody tr:last-child td {
+        tr:last-child td {
             border-bottom: none;
         }
 
-        .id {
-            color: #6b7280;
-            font-weight: 500;
-        }
-
-        .name {
-            font-weight: 500;
-            color: #111827;
-        }
-
-        .email {
-            color: #4b5563;
-        }
-
-        .username {
-            color: #4b5563;
+        tr:hover {
+            background-color: #fafafa;
         }
 
         .no-data {
             text-align: center;
-            padding: 40px 20px;
-            color: #9ca3af;
+            padding: 25px;
+            color: #888;
         }
 
-        @media (max-width: 700px) {
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 600px) {
             body {
-                padding: 20px 10px;
+                padding: 15px;
             }
 
             .container {
-                padding: 20px;
-            }
-
-            .header {
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 5px;
+                padding: 18px;
             }
 
             h1 {
-                font-size: 22px;
+                font-size: 21px;
+            }
+
+            table {
+                min-width: 650px;
             }
         }
     </style>
@@ -138,16 +94,9 @@
 
 <div class="container">
 
-    <div class="header">
-        <h1>Users</h1>
-
-        <div class="user-count">
-            <?= !empty($users) ? count($users) . ' users' : '0 users' ?>
-        </div>
-    </div>
+    <h1>Users</h1>
 
     <div class="table-wrapper">
-
         <table>
             <thead>
                 <tr>
@@ -166,25 +115,11 @@
                     <?php foreach ($users as $user): ?>
 
                         <tr>
-                            <td class="id">
-                                <?= htmlspecialchars($user['id']) ?>
-                            </td>
-
-                            <td class="name">
-                                <?= htmlspecialchars($user['firstname']) ?>
-                            </td>
-
-                            <td class="name">
-                                <?= htmlspecialchars($user['lastname']) ?>
-                            </td>
-
-                            <td class="email">
-                                <?= htmlspecialchars($user['email']) ?>
-                            </td>
-
-                            <td class="username">
-                                <?= htmlspecialchars($user['username']) ?>
-                            </td>
+                            <td><?= htmlspecialchars($user['id']) ?></td>
+                            <td><?= htmlspecialchars($user['firstname']) ?></td>
+                            <td><?= htmlspecialchars($user['lastname']) ?></td>
+                            <td><?= htmlspecialchars($user['email']) ?></td>
+                            <td><?= htmlspecialchars($user['username']) ?></td>
                         </tr>
 
                     <?php endforeach; ?>
@@ -201,11 +136,10 @@
 
             </tbody>
         </table>
-
     </div>
 
 </div>
 
 </body>
 </html>
-```
+
