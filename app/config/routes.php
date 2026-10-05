@@ -58,9 +58,39 @@ $router->get('/register', 'AuthController::register');
 $router->post('/register', 'AuthController::store_register');
 $router->get('/logout', 'AuthController::logout');
 
+$router->options('/api/login', 'ApiController::preflight');
+$router->options('/api/register', 'ApiController::preflight');
+$router->options('/api/refresh', 'ApiController::preflight');
+$router->options('/api/logout', 'ApiController::preflight');
+$router->options('/api/me', 'ApiController::preflight');
+$router->options('/api/products', 'ApiController::preflight');
+$router->options('/api/products/{id}', 'ApiController::preflight');
+$router->post('/api/login', 'ApiController::login');
+$router->post('/api/register', 'ApiController::register');
+$router->post('/api/refresh', 'ApiController::refresh');
+$router->post('/api/logout', 'ApiController::logout');
+$router->get('/api/me', 'ApiController::me');
+$router->get('/api/products', 'ApiController::products');
+$router->post('/api/products', 'ApiController::create_product');
+$router->put('/api/products/{id}', 'ApiController::update_product')->where_number('id');
+$router->delete('/api/products/{id}', 'ApiController::delete_product')->where_number('id');
+
 $router->get('/products', 'ProductController::index')->middleware('auth');
 $router->get('/products/create', 'ProductController::create')->middleware(['auth', 'admin']);
 $router->post('/products/create', 'ProductController::store')->middleware(['auth', 'admin']);
 $router->get('/products/edit/{id}', 'ProductController::edit')->middleware(['auth', 'admin'])->where_number('id');
 $router->post('/products/edit/{id}', 'ProductController::update')->middleware(['auth', 'admin'])->where_number('id');
 $router->post('/products/delete/{id}', 'ProductController::delete')->middleware(['auth', 'admin'])->where_number('id');
+
+
+$router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
+
+$router->get('migrate', 'MigrationController::migrate');
+
+$router->get('rollback', 'MigrationController::rollback');
+
+$router->get('rollback-all', 'MigrationController::rollback_all');
+
+$router->get('refresh', 'MigrationController::refresh');
+
+$router->get('status', 'MigrationController::status');

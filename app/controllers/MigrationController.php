@@ -8,11 +8,9 @@ class MigrationController extends Controller
 
 {
 
-public function construct()
+public function before_action()
 
 {
-
-parent::construct();
 
 $this->call->library('migration');
 
