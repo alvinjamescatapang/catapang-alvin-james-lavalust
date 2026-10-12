@@ -3,15 +3,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class ProductController extends Controller
 {
-    /**
-     * Actions only an admin is allowed to perform.
-     * Enforced again here as a backstop in case route middleware
-     * is ever changed - the route-level 'admin' middleware is the
-     * primary guard.
-     *
-     * @var array
-     */
-    private $admin_only_actions = ['create', 'store', 'edit', 'update', 'delete'];
+    private $read_only_actions = ['create', 'store', 'edit', 'update', 'delete'];
 
     public function before_action()
     {
@@ -23,8 +15,8 @@ class ProductController extends Controller
         $this->call->model('ProductModel');
 
         $action = $this->current_action();
-        if (in_array($action, $this->admin_only_actions, true) && ($_SESSION['role'] ?? null) !== 'admin') {
-            $_SESSION['flash_error'] = 'Only administrators can manage products.';
+        if (in_array($action, $this->read_only_actions, true)) {
+            $_SESSION['flash_error'] = 'Product catalog is read-only.';
             redirect('products');
             exit;
         }
