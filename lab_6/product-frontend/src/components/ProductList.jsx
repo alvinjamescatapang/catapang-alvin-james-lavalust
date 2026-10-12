@@ -1,12 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getProducts, errorMessage } from '../api.js';
+import { getProducts, deleteProduct, errorMessage } from '../api.js';
+import ProductForm from './ProductForm.jsx';
 
 const peso = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' });
 
 export default function ProductList({ user, onLogout }) {
+  const canManageProducts = user.role === 'admin';
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [formFor, setFormFor] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -22,6 +26,23 @@ export default function ProductList({ user, onLogout }) {
 
   useEffect(() => { load(); }, [load]);
 
+  const handleDelete = async (product) => {
+    if (!window.confirm(`Delete "${product.product_name}"?`)) return;
+    try {
+      await deleteProduct(product.id);
+      setNotice('Product deleted.');
+      load();
+    } catch (err) {
+      setError(errorMessage(err));
+    }
+  };
+
+  const handleSaved = (message) => {
+    setFormFor(null);
+    setNotice(message);
+    load();
+  };
+
   return (
     <div className="container">
       <header>
@@ -33,16 +54,21 @@ export default function ProductList({ user, onLogout }) {
       </header>
 
       {error && <div className="alert error">{error}</div>}
+      {notice && <div className="alert success" onClick={() => setNotice('')}>{notice}</div>}
+
+      {canManageProducts && <div className="toolbar">
+        <button onClick={() => setFormFor({})}>+ Add product</button>
+      </div>}
 
       <div className="card table-wrap">
         {loading ? <p className="center">Loading…</p> : (
           <table>
             <thead>
-              <tr><th>#</th><th>Name</th><th>Description</th><th className="num">Price</th><th className="num">Qty</th><th>Created</th></tr>
+              <tr><th>#</th><th>Name</th><th>Description</th><th className="num">Price</th><th className="num">Qty</th><th>Created</th>{canManageProducts && <th>Actions</th>}</tr>
             </thead>
             <tbody>
               {products.length === 0 && (
-                <tr><td colSpan="6" className="center muted">No products yet.</td></tr>
+                <tr><td colSpan={canManageProducts ? 7 : 6} className="center muted">No products yet.</td></tr>
               )}
               {products.map((p) => (
                 <tr key={p.id}>
@@ -52,12 +78,24 @@ export default function ProductList({ user, onLogout }) {
                   <td className="num">{peso.format(p.price)}</td>
                   <td className="num">{p.quantity}</td>
                   <td className="muted">{p.created_at}</td>
+                  {canManageProducts && <td className="actions">
+                    <button className="secondary small" onClick={() => setFormFor(p)}>Edit</button>
+                    <button className="danger small" onClick={() => handleDelete(p)}>Delete</button>
+                  </td>}
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </div>
+
+      {canManageProducts && formFor && (
+        <ProductForm
+          product={formFor.id ? formFor : null}
+          onSaved={handleSaved}
+          onCancel={() => setFormFor(null)}
+        />
+      )}
 
     </div>
   );

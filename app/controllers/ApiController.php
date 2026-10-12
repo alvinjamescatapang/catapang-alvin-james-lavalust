@@ -132,17 +132,59 @@ class ApiController extends Controller
 
     public function create_product()
     {
-        $this->api->respond_error('Product catalog is read-only.', 403);
+        $this->require_admin();
+        $this->call->model('ProductModel');
+        $input = $this->product_input($this->input());
+        if (isset($input['error'])) {
+            $this->api->respond_error($input['error'], 400);
+        }
+
+        $id = $this->ProductModel->insert($input);
+        $this->api->respond(['data' => $this->ProductModel->find($id)], 201);
     }
 
     public function update_product($id)
     {
-        $this->api->respond_error('Product catalog is read-only.', 403);
+        $this->require_admin();
+        $this->call->model('ProductModel');
+        if (!$this->ProductModel->find((int) $id)) {
+            $this->api->respond_error('Product not found.', 404);
+        }
+
+        $input = $this->product_input($this->input());
+        if (isset($input['error'])) {
+            $this->api->respond_error($input['error'], 400);
+        }
+
+        $this->ProductModel->update((int) $id, $input);
+        $this->api->respond(['data' => $this->ProductModel->find((int) $id)]);
     }
 
     public function delete_product($id)
     {
-        $this->api->respond_error('Product catalog is read-only.', 403);
+        $this->require_admin();
+        $this->call->model('ProductModel');
+        if (!$this->ProductModel->find((int) $id)) {
+            $this->api->respond_error('Product not found.', 404);
+        }
+
+        $this->ProductModel->delete((int) $id);
+        $this->api->respond(['message' => 'Product deleted successfully.']);
+    }
+
+    private function require_admin()
+    {
+        $payload = $this->api->require_jwt();
+        $this->call->database();
+        $this->call->model('UsersModel');
+        $user = $this->UsersModel->find((int) $payload['sub']);
+
+        if (!$user || (int) ($user['is_active'] ?? 0) !== 1) {
+            $this->api->respond_error('Unauthorized', 401);
+        }
+        if (($user['role'] ?? 'user') !== 'admin') {
+            $this->api->respond_error('Admin access required.', 403);
+        }
     }
 
     private function input()
